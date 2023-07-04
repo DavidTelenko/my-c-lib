@@ -1,5 +1,5 @@
-#ifndef INCLUDED_ALPHABET_H
-#define INCLUDED_ALPHABET_H
+#ifndef MATRIX2
+#define MATRIX2
 
 #include <assert.h>
 #include <iso646.h>
@@ -15,15 +15,28 @@ typedef struct {
     void* const data;
 } matrix2;
 
-matrix_segment_view m2_get_row(matrix2* const m, size_t index);
-matrix_segment_view m2_get_column(matrix2* const m, size_t index);
+typedef void (*Apply)(void* const,
+                      void const* const,
+                      void const* const);
 
-void m2_set_row(matrix2* m, size_t index, void* data);
-void m2_set_column(matrix2* m, size_t index, void* data);
+matrix_segment_view m2_get_row(matrix2 const* const m, size_t index);
+matrix_segment_view m2_get_column(matrix2 const* const m, size_t index);
+void* const m2_get_from_row(matrix_segment_view const* const row, size_t index);
+void* const m2_get_from_column(matrix_segment_view const* const column, size_t index);
+void* const m2_get_from_matrix(matrix2 const* const m, size_t column, size_t row);
 
-void* const m2_get_from_row(matrix_segment_view* row, size_t index);
-void* const m2_get_from_column(matrix_segment_view* column, size_t index);
+void m2_set_row(matrix2* const m, size_t index, void* data);
+void m2_set_column(matrix2* const m, size_t index, void* data);
+void m2_set_at(matrix2* const m, size_t i, size_t j, void* data);
 
-void* const m2_get_from_matrix(matrix2* m, size_t column, size_t row);
+void m2_mult(matrix2* const dest,
+             matrix2 const* const lhs,
+             matrix2 const* const rhs,
+             Apply perf);
 
-#endif
+void m2_apply(matrix2* const dest,
+              matrix2 const* const lhs,
+              matrix2 const* const rhs,
+              Apply perf);
+
+#endif // MATRIX2
