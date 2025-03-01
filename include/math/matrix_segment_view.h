@@ -1,5 +1,5 @@
-#ifndef MATRIX_SEGMENT_VIEW_H
-#define MATRIX_SEGMENT_VIEW_H
+#ifndef MY_MATRIX_SEGMENT_VIEW_H
+#define MY_MATRIX_SEGMENT_VIEW_H
 
 #include <stdlib.h>
 
@@ -9,4 +9,4 @@ typedef struct {
     const size_t end;
 } matrix_segment_view;
 
-#endif  // MATRIX_SEGMENT_VIEW_H
+#endif  // MY_MATRIX_SEGMENT_VIEW_H

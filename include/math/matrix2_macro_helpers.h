@@ -1,13 +1,15 @@
-#ifndef MATRIX2_MACRO_HELPERS
-#define MATRIX2_MACRO_HELPERS
+#ifndef MY_MATRIX2_MACRO_HELPERS
+#define MY_MATRIX2_MACRO_HELPERS
 
 #include <matrix2.h>
 #include <types.h>
 
-#define CREATE_MATRIX2(data_type, num_rows, num_cols, buffer)           \
-    {                                                                   \
-        .rows = num_rows, .cols = num_cols, .dtype = sizeof(data_type), \
-        .data = (void* const)buffer,                                    \
+#define CREATE_MATRIX2(data_type, num_rows, num_cols, buffer) \
+    {                                                         \
+        .rows = num_rows,                                     \
+        .cols = num_cols,                                     \
+        .dtype = sizeof(data_type),                           \
+        .data = (void* const)buffer,                          \
     }
 
 #define PRINT_MATRIX2(m, format, dtype)                      \
@@ -22,11 +24,10 @@
         }                                                    \
     }
 
-#define DEFINE_APPLY_LAMBDA(dtype, op, name)               \
-    void dtype##_##apply##_##name(void* const dest,        \
-                                  void const* const lhs,   \
-                                  void const* const rhs) { \
-        *(dtype*)dest op*(dtype*)lhs**(dtype*)rhs;         \
+#define DEFINE_APPLY_LAMBDA(dtype, op, name)                               \
+    void dtype##_##apply##_##name(void* const dest, void const* const lhs, \
+                                  void const* const rhs) {                 \
+        *(dtype*)dest op*(dtype*)lhs**(dtype*)rhs;                         \
     }
 
 #define DEFINE_APPLY_ADD(dtype) DEFINE_APPLY_LAMBDA(dtype, +=, add)
@@ -51,4 +52,4 @@ FOR_ALL_TYPES(DEFINE_APPLY_MULT)
 FOR_ALL_TYPES(DEFINE_APPLY_DIV)
 FOR_ALL_TYPES(DEFINE_APPLY_EQ)
 
-#endif  // MATRIX2_MACRO_HELPERS
+#endif  // MY_MATRIX2_MACRO_HELPERS

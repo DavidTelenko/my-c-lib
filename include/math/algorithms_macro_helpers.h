@@ -1,5 +1,5 @@
-#ifndef ALGORITHMS_MACRO_HELPERS
-#define ALGORITHMS_MACRO_HELPERS
+#ifndef MY_ALGORITHMS_MACRO_HELPERS
+#define MY_ALGORITHMS_MACRO_HELPERS
 
 /**
  * @brief Helper macro to get size of an array
@@ -17,18 +17,17 @@
  * @param Type type of elements in array
  *
  */
-#define BEGIN_END(Arr, Type) \
-    Arr, Arr + ARRAY_SIZE(Arr, Type)
+#define BEGIN_END(Arr, Type) Arr, Arr + ARRAY_SIZE(Arr, Type)
 
 /**
- * @brief Helper macro to pass begin, end and size of the array to the algorithms
+ * @brief Helper macro to pass begin, end and size of the array to the
+ * algorithms
  *
  * @param Arr array to get iterators from
  * @param Type type of elements in array
  *
  */
-#define BEGIN_END_SIZE(Arr, Type) \
-    Arr, Arr + ARRAY_SIZE(Arr, Type), sizeof(Type)
+#define BEGIN_END_SIZE(Arr, Type) Arr, Arr + ARRAY_SIZE(Arr, Type), sizeof(Type)
 
 /**
  * @brief Helper macro to pass reverse begin, reverse end and size of the
@@ -52,4 +51,4 @@
  */
 #define LAMBDA(ReturnType, Body) ({ ReturnType _ Body _; })
 
-#endif  // ALGORITHMS_MACRO_HELPERS
+#endif  // MY_ALGORITHMS_MACRO_HELPERS

@@ -8,7 +8,8 @@ bool _unary_not_predicate_wrapper(const void *const any) {
     return not _local_unary_predicate(any);
 }
 
-bool _binary_not_predicate_wrapper(const void *const lhs, const void *const rhs) {
+bool _binary_not_predicate_wrapper(const void *const lhs,
+                                   const void *const rhs) {
     assert(_local_binary_predicate);
     return not _local_binary_predicate(lhs, rhs);
 }
@@ -24,7 +25,8 @@ BinaryPredicate not_binary_predicate(BinaryPredicate p) {
 }
 
 void memswap(void *lhs, void *rhs, size_t nbytes) {
-    for (char *_lhs = (char *)lhs, *_rhs = (char *)rhs; nbytes--; _lhs++, _rhs++) {
+    for (char *_lhs = (char *)lhs, *_rhs = (char *)rhs; nbytes--;
+         _lhs++, _rhs++) {
         char tmp = *_lhs;
         *_lhs = *_rhs;
         *_rhs = tmp;
@@ -85,6 +87,9 @@ size_t count(const void *first, const void *const last, size_t dtype,
 Pair mismatch(const void *first1, const void *const last1, int64_t dtype1,
               const void *first2, const void *const last2, int64_t dtype2,
               BinaryPredicate p) {
+    while (first1 != last1 and first2 != last2 and p(first1, first2)) {
+        ADVANCE(first1, typeSize1);
+        ADVANCE(first2, typeSize2);
     while (first1 != last1 and first2 != last2 and
            p(first1, first2)) {
         ADVANCE(first1, dtype1);
@@ -158,8 +163,9 @@ void fill(void *first, const void *const last, int64_t dtype,
     }
 }
 
-void transform(const void *source_first, const void *const source_last, int64_t source_dtype,
-               void *dest_first, const void *const dest_last, int64_t dest_dtype,
+void transform(const void *source_first, const void *const source_last,
+               int64_t source_dtype, void *dest_first,
+               const void *const dest_last, int64_t dest_dtype,
                UnaryOperator op) {
     while (source_first != source_last and dest_first != dest_last) {
         memcpy(dest_first, op(source_first), dest_dtype);

@@ -38,7 +38,8 @@
  * @param lhs right hand side pointer preferably the beginning of the range
  *
  */
-#define PTR_DIFFERENCE(lhs, rhs, Type) (((char *)lhs - (char *)rhs) / sizeof(Type))
+#define PTR_DIFFERENCE(lhs, rhs, Type) \
+    (((char *)lhs - (char *)rhs) / sizeof(Type))
 
 /**
  * @brief Structure to hold two values.
@@ -65,7 +66,8 @@ typedef void (*PrintFunction)(const void *);
 typedef void (*BinaryLApplicator)(void *const, const void *const);
 
 /**
- * @brief Operator that accepts value of the sized type and returns value of the same sized type
+ * @brief Operator that accepts value of the sized type and returns value of the
+ * same sized type
  *
  */
 typedef void *(*UnaryOperator)(const void *const);
